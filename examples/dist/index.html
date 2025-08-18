@@ -4,7 +4,18 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Leptos Lucide Icons - Advanced Styling</title>
-        <link data-trunk rel="rust" data-bin="advanced_styling" />
+        
+<script type="module">
+import init, * as bindings from '/advanced_styling-3a1d2d9724e1a353.js';
+const wasm = await init({ module_or_path: '/advanced_styling-3a1d2d9724e1a353_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
 
         <style>
             body {
@@ -335,7 +346,7 @@
                 stroke-linejoin: round;
             }
         </style>
-    </head>
+    <link rel="modulepreload" href="/advanced_styling-3a1d2d9724e1a353.js" crossorigin="anonymous" integrity="sha384-wcOnG/tBLFmmlX1ksIVYk6mGj0bo5fnl6hapwaITR1qKAWMDbMgdahft9GA/+h8g"><link rel="preload" href="/advanced_styling-3a1d2d9724e1a353_bg.wasm" crossorigin="anonymous" integrity="sha384-w+mieh5nSMTATS+E9IduV8SVmJmkiNhbNoWFavFmI7XuvLEegVbhO9yQORcQ5HxA" as="fetch" type="application/wasm"></head>
     <body>
         <div id="app"></div>
     </body>

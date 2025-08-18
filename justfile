@@ -68,22 +68,22 @@ examples: build
 # Run simple example with trunk
 run-simple: build
     @echo "Running simple example on http://localhost:8080..."
-    cd examples && trunk serve --bin simple --port 8080 --open
+    cd examples && trunk serve index.html --port 8080 --open
 
 # Run advanced styling example with trunk
 run-advanced: build
     @echo "Running advanced styling example on http://localhost:8081..."
-    cd examples && trunk serve --bin advanced_styling --port 8081 --open --index advanced.html
+    cd examples && trunk serve advanced.html --port 8081 --open
 
 # Build simple example for production
 build-simple: build
     @echo "Building simple example for production..."
-    cd examples && trunk build --bin simple --release
+    cd examples && trunk build index.html --release
 
 # Build advanced example for production
 build-advanced: build
     @echo "Building advanced example for production..."
-    cd examples && trunk build --bin advanced_styling --release --index advanced.html
+    cd examples && trunk build advanced.html --release
 
 # Generate documentation
 docs:
@@ -110,12 +110,12 @@ bench:
 # Start development server for simple example
 dev: build
     @echo "Starting development server for simple example..."
-    cd examples && trunk serve --bin simple --port 8080
+    cd examples && trunk serve index.html --port 8080
 
 # Start development server for advanced example
 dev-advanced: build
     @echo "Starting development server for advanced example..."
-    cd examples && trunk serve --bin advanced_styling --port 8081 --index advanced.html
+    cd examples && trunk serve advanced.html --port 8081
 
 # Watch for changes and rebuild
 watch:
