@@ -1,0 +1,192 @@
+# Leptos Lucide Icons - Development Makefile
+
+.PHONY: help build test check clean examples docs release install-deps
+
+# Default target
+help: ## Show this help message
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
+
+# Dependencies
+install-deps: ## Install development dependencies
+	@echo "Installing development dependencies..."
+	rustup component add rustfmt clippy
+	cargo install trunk wasm-bindgen-cli
+
+# Build targets
+build: ## Build the library
+	@echo "Building leptos-lucide..."
+	cargo build
+
+build-release: ## Build the library in release mode
+	@echo "Building leptos-lucide (release)..."
+	cargo build --release
+
+# Generate icons from latest Lucide data
+generate-icons: ## Force regeneration of icon components
+	@echo "Regenerating icon components..."
+	cargo clean
+	cargo build
+
+# Testing
+test: ## Run all tests
+	@echo "Running tests..."
+	cargo test
+
+test-verbose: ## Run tests with verbose output
+	@echo "Running tests (verbose)..."
+	cargo test -- --nocapture
+
+# Code quality
+check: ## Run clippy and format checks
+	@echo "Running clippy..."
+	cargo clippy -- -D warnings
+	@echo "Checking formatting..."
+	cargo fmt --check
+
+fmt: ## Format code
+	@echo "Formatting code..."
+	cargo fmt
+
+clippy: ## Run clippy
+	@echo "Running clippy..."
+	cargo clippy -- -D warnings
+
+# Examples
+examples: build ## Build all examples
+	@echo "Building examples..."
+	cd examples && cargo build --bin simple
+	cd examples && cargo build --bin advanced_styling
+
+run-basic: ## Run basic example
+	@echo "Running basic example..."
+	cd examples && trunk serve --bin simple --port 8080
+
+run-advanced: ## Run advanced styling example
+	@echo "Running advanced styling example..."
+	cd examples && trunk serve --bin advanced_styling --port 8080
+
+# Documentation
+docs: ## Generate documentation
+	@echo "Generating documentation..."
+	cargo doc --no-deps --open
+
+docs-private: ## Generate documentation including private items
+	@echo "Generating documentation (including private items)..."
+	cargo doc --no-deps --document-private-items --open
+
+# Clean
+clean: ## Clean build artifacts
+	@echo "Cleaning build artifacts..."
+	cargo clean
+	rm -rf target/
+	rm -rf examples/dist/
+
+# Release
+release-patch: ## Release a patch version
+	@echo "Releasing patch version..."
+	cargo release patch --execute
+
+release-minor: ## Release a minor version
+	@echo "Releasing minor version..."
+	cargo release minor --execute
+
+release-major: ## Release a major version
+	@echo "Releasing major version..."
+	cargo release major --execute
+
+# Benchmarks
+bench: ## Run benchmarks
+	@echo "Running benchmarks..."
+	cargo bench
+
+# Development server for examples
+dev-server: ## Start development server for examples
+	@echo "Starting development server..."
+	cd examples && trunk serve --port 8080
+
+# Watch for changes and rebuild
+watch: ## Watch for changes and rebuild
+	@echo "Watching for changes..."
+	cargo watch -x build
+
+watch-test: ## Watch for changes and run tests
+	@echo "Watching for changes and running tests..."
+	cargo watch -x test
+
+# Audit dependencies
+audit: ## Audit dependencies for security vulnerabilities
+	@echo "Auditing dependencies..."
+	cargo audit
+
+# Update dependencies
+update: ## Update dependencies
+	@echo "Updating dependencies..."
+	cargo update
+
+# Check for outdated dependencies
+outdated: ## Check for outdated dependencies
+	@echo "Checking for outdated dependencies..."
+	cargo outdated
+
+# Coverage
+coverage: ## Generate test coverage report
+	@echo "Generating coverage report..."
+	cargo tarpaulin --out Html --output-dir coverage
+
+# Lint all files
+lint: ## Run all linting tools
+	@echo "Running all linting tools..."
+	make clippy
+	make fmt
+	@echo "Linting complete!"
+
+# Check build on different targets
+check-targets: ## Check build on multiple targets
+	@echo "Checking WASM target..."
+	cargo check --target wasm32-unknown-unknown
+	@echo "Checking native target..."
+	cargo check
+
+# Performance testing
+perf: ## Run performance tests
+	@echo "Running performance tests..."
+	cargo test --release -- --ignored perf
+
+# Generate icon list
+icon-list: ## Generate list of available icons
+	@echo "Generating icon list..."
+	@cargo build 2>&1 | grep -o "Generated [0-9]* icons" || echo "Build to see icon count"
+
+# Validate generated code
+validate: ## Validate generated icon code
+	@echo "Validating generated code..."
+	cargo check --tests
+
+# Setup development environment
+setup: install-deps ## Setup complete development environment
+	@echo "Setting up development environment..."
+	@echo "Installing trunk for WASM builds..."
+	cargo install trunk
+	@echo "Setup complete! Run 'make help' to see available commands."
+
+# All checks before committing
+pre-commit: ## Run all pre-commit checks
+	@echo "Running pre-commit checks..."
+	make fmt
+	make clippy
+	make test
+	make check-targets
+	@echo "All checks passed! ✅"
+
+# Quick development cycle
+dev: ## Quick development build and test
+	@echo "Quick development cycle..."
+	cargo build && cargo test
+
+# Check everything is working
+verify: ## Verify the library works correctly
+	@echo "Verifying library..."
+	make build
+	make test
+	make examples
+	@echo "Library verification complete! ✅"
