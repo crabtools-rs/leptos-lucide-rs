@@ -1,7 +1,7 @@
 # leptos-lucide-tree
 
 A comprehensive Lucide icon library for Leptos with tree-shaking support and
-zero-cost abstractions.
+zero-cost runtime overhead.
 
 ## 🌟 Features
 
