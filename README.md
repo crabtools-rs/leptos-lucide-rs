@@ -25,7 +25,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-leptos-lucide-tree = "0.1.0"
+leptos-lucide-tree = "0.1.4"
 leptos = "0.8.6"
 ```
 
@@ -318,7 +318,7 @@ The library uses a build script that:
 
 ```toml
 [dependencies.leptos-lucide-tree]
-version = "0.1.0"
+version = "0.1.4"
 features = ["ssr"]  # For server-side rendering
 # features = ["hydrate"]  # For hydration
 # features = ["csr"]  # For client-side rendering only
