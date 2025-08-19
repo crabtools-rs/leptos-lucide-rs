@@ -39,10 +39,10 @@
 //!     view! {
 //!         <div>
 //!             // Using the macro for custom classes
-//!             {lucide_icon!(Home, class = "text-blue-500 w-6 h-6")}
+//!             {leptos_lucide_icon!(Home, class = "text-blue-500 w-6 h-6")}
 //!
 //!             // Using the macro for custom sizes
-//!             {lucide_icon!(User, size = "32px")}
+//!             {leptos_lucide_icon!(User, size = "32px")}
 //!
 //!             // Direct component with custom attributes
 //!             <div class="icon-wrapper">
@@ -70,7 +70,7 @@ pub mod fallback {
     pub fn Home() -> impl IntoView {
         view! {
             <svg
-                class="lucide-icon"
+                class="leptos-lucide-icon"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -80,10 +80,9 @@ pub mod fallback {
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                data-lucide="home"
+                data-leptos-lucide="home"
+                inner_html=r#"<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9,22 9,12 15,12 15,22"></polyline>"#
             >
-                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9,22 9,12 15,12 15,22"></polyline>
             </svg>
         }
     }
@@ -94,7 +93,7 @@ pub mod fallback {
     pub fn User() -> impl IntoView {
         view! {
             <svg
-                class="lucide-icon"
+                class="leptos-lucide-icon"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -104,10 +103,9 @@ pub mod fallback {
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                data-lucide="user"
+                data-leptos-lucide="user"
+                inner_html=r#"<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>"#
             >
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
             </svg>
         }
     }
@@ -118,7 +116,7 @@ pub mod fallback {
     pub fn Heart() -> impl IntoView {
         view! {
             <svg
-                class="lucide-icon"
+                class="leptos-lucide-icon"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -128,9 +126,9 @@ pub mod fallback {
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                data-lucide="heart"
+                data-leptos-lucide="heart"
+                inner_html=r#"<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>"#
             >
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
             </svg>
         }
     }
@@ -141,7 +139,7 @@ pub mod fallback {
     pub fn Search() -> impl IntoView {
         view! {
             <svg
-                class="lucide-icon"
+                class="leptos-lucide-icon"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -151,10 +149,9 @@ pub mod fallback {
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                data-lucide="search"
+                data-leptos-lucide="search"
+                inner_html=r#"<circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path>"#
             >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="M21 21l-4.35-4.35"></path>
             </svg>
         }
     }
@@ -165,7 +162,7 @@ pub mod fallback {
     pub fn Star() -> impl IntoView {
         view! {
             <svg
-                class="lucide-icon"
+                class="leptos-lucide-icon"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -175,9 +172,9 @@ pub mod fallback {
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                data-lucide="star"
+                data-leptos-lucide="star"
+                inner_html=r#"<polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>"#
             >
-                <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>
             </svg>
         }
     }

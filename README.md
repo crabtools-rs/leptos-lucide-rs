@@ -73,7 +73,7 @@ pub fn BasicIcons() -> impl IntoView {
 }
 ```
 
-### Using the `lucide_icon!` Macro
+### Using the `leptos_lucide_icon!` Macro
 
 ```rust
 use leptos::*;
@@ -84,13 +84,13 @@ pub fn MacroExamples() -> impl IntoView {
     view! {
         <div class="flex gap-4">
             // Basic icon
-            {lucide_icon!(Home)}
+            {leptos_lucide_icon!(Home)}
 
             // With custom class
-            {lucide_icon!(User, class = "text-red-500 w-8 h-8")}
+            {leptos_lucide_icon!(User, class = "text-red-500 w-8 h-8")}
 
             // With custom size
-            {lucide_icon!(Heart, size = "32px")}
+            {leptos_lucide_icon!(Heart, size = "32px")}
         </div>
     }
 }
@@ -107,8 +107,8 @@ pub fn ConfigurableIcons() -> impl IntoView {
     view! {
         <div class="grid grid-cols-3 gap-4">
             // Using Icon component with configuration
-            <Icon 
-                icon=|| Home() 
+            <Icon
+                icon=|| Home()
                 config=Some(IconConfig::new()
                     .class("text-green-500")
                     .size("24px")
@@ -116,8 +116,8 @@ pub fn ConfigurableIcons() -> impl IntoView {
             />
 
             // Multiple configurations
-            <Icon 
-                icon=|| Search() 
+            <Icon
+                icon=|| Search()
                 config=Some(IconConfig::new()
                     .class("hover:text-blue-500 transition-colors")
                     .size("20px")
@@ -142,17 +142,17 @@ pub fn BuilderIcons() -> impl IntoView {
             {icon!(Home)}
 
             // With builder methods
-            {icon!(User, 
-                class("text-purple-500"), 
+            {icon!(User,
+                class("text-purple-500"),
                 size("28px"),
                 stroke_width("2")
             )}
 
             // Complex styling
-            {icon!(Heart, 
+            {icon!(Heart,
                 class("text-red-500 hover:text-red-600"),
-                size("32px"), 
-                stroke_width("1.5"), 
+                size("32px"),
+                stroke_width("1.5"),
                 style("cursor: pointer; transition: color 0.2s;")
             )}
         </div>
@@ -167,20 +167,20 @@ pub fn BuilderIcons() -> impl IntoView {
 Add custom styles for your icons:
 
 ```css
-.lucide-icon {
-    /* Default icon styles */
-    transition: all 0.2s ease-in-out;
+.leptos-lucide-icon {
+  /* Default icon styles */
+  transition: all 0.2s ease-in-out;
 }
 
-.lucide-icon:hover {
-    transform: scale(1.1);
+.leptos-lucide-icon:hover {
+  transform: scale(1.1);
 }
 
-.lucide-wrapper {
-    /* Wrapper styles for positioning */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+.leptos-lucide-wrapper {
+  /* Wrapper styles for positioning */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 ```
 
@@ -195,18 +195,18 @@ pub fn ConditionalIcon() -> impl IntoView {
     let (is_liked, set_liked) = create_signal(false);
 
     view! {
-        <button 
+        <button
             on:click=move |_| set_liked.update(|liked| *liked = !*liked)
             class="p-2 rounded hover:bg-gray-100"
         >
             {move || if is_liked() {
-                icon!(Heart, 
-                    class("text-red-500 fill-current"), 
+                icon!(Heart,
+                    class("text-red-500 fill-current"),
                     size("24px")
                 )
             } else {
-                icon!(Heart, 
-                    class("text-gray-400"), 
+                icon!(Heart,
+                    class("text-gray-400"),
                     size("24px")
                 )
             }}
@@ -265,9 +265,9 @@ This library includes all Lucide icons with Rust-friendly names. Some examples:
 - `ArrowRight` (from `arrow-right`)
 - `PlusCircle` (from `plus-circle`)
 - `MinusIcon` (from `minus` - renamed to avoid conflict with Rust's minus
-operator)
+  operator)
 - `TypeIcon` (from `type` - renamed to avoid conflict with Rust's `type`
-keyword)
+  keyword)
 
 ### Naming Convention
 
@@ -328,7 +328,7 @@ features = ["ssr"]  # For server-side rendering
 
 You can customize the build process by setting environment variables:
 
-```bash # Skip downloading and use cached icons LUCIDE_OFFLINE=1 cargo build
+````bash # Skip downloading and use cached icons LUCIDE_OFFLINE=1 cargo build
 
 # Use a specific Lucide version LUCIDE_VERSION=v0.263.0 cargo build ```
 
@@ -345,7 +345,7 @@ zero call overhead in release builds:
 pub fn Home() -> impl leptos::IntoView {
     // Implementation is inlined directly at call site
 }
-```
+````
 
 ### Tree Shaking
 
@@ -433,6 +433,7 @@ just help
 ### Development Commands
 
 #### Building and Testing
+
 ```bash
 # Build the library (downloads icons and generates components)
 just build
@@ -448,6 +449,7 @@ just test-examples
 ```
 
 #### Code Quality
+
 ```bash
 # Format code
 just fmt
@@ -463,6 +465,7 @@ just pre-commit
 ```
 
 #### Examples
+
 ```bash
 # Build all examples
 just examples
@@ -479,11 +482,12 @@ just build-advanced
 ```
 
 #### Development Workflow
+
 ```bash
 # Start development server for simple example
 just dev
 
-# Start development server for advanced example  
+# Start development server for advanced example
 just dev-advanced
 
 # Watch for changes and rebuild automatically
@@ -500,6 +504,7 @@ just dev-full
 ```
 
 #### Icon Management
+
 ```bash
 # Force regeneration of icon components
 just generate-icons
@@ -512,6 +517,7 @@ just validate
 ```
 
 #### Documentation
+
 ```bash
 # Generate and open documentation
 just docs
@@ -521,6 +527,7 @@ just docs-private
 ```
 
 #### Maintenance
+
 ```bash
 # Clean build artifacts
 just clean
@@ -539,6 +546,7 @@ just coverage
 ```
 
 #### Release
+
 ```bash
 # Prepare for release (runs all checks)
 just release-prep
@@ -554,6 +562,7 @@ just release-major
 ```
 
 #### Verification
+
 ```bash
 # Verify library works correctly (build + test + examples)
 just verify
@@ -589,9 +598,11 @@ Check out the [examples](examples/) directory for more usage patterns:
 ## 🔗 Related Projects
 
 - [leptos](https://github.com/leptos-rs/leptos) - The reactive web framework
-this library is built for
+  this library is built for
 - [lucide](https://lucide.dev/) - The source of the beautiful icons
 - [tauri-icons](https://github.com/tauri-apps/tauri-icons) - Similar icon
-library for Tauri apps
-````
+  library for Tauri apps
 
+```
+
+```

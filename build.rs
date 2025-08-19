@@ -37,7 +37,7 @@ fn main() {
 
 fn fetch_lucide_icons() -> HashMap<String, String> {
     // Try to fetch from Lucide's official icon data
-    let url = "https://raw.githubusercontent.com/lucide-icons/lucide/main/docs/icons.json";
+    let url = "https://api.github.com/repos/lucide-icons/lucide/contents/icons";
 
     match reqwest::blocking::get(url) {
         Ok(response) => {
@@ -60,6 +60,7 @@ fn parse_lucide_data(data: serde_json::Value) -> HashMap<String, String> {
     if let Some(obj) = data.as_object() {
         for (name, icon_data) in obj {
             if let Some(svg_content) = extract_svg_content(icon_data) {
+                dbg!(&svg_content);
                 icons.insert(name.clone(), svg_content);
             }
         }
@@ -124,7 +125,7 @@ fn generate_icon_components(icons: &HashMap<String, String>) -> TokenStream {
             pub fn #component_ident() -> impl leptos::IntoView {
                 leptos::view! {
                     <svg
-                        class="lucide-icon"
+                        class="leptos-lucide-icon"
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
                         height="24"
@@ -134,7 +135,7 @@ fn generate_icon_components(icons: &HashMap<String, String>) -> TokenStream {
                         stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        data-lucide={#kebab_name}
+                        data-leptos-lucide={#kebab_name}
                         inner_html={#svg_content}
                     >
                     </svg>
@@ -148,9 +149,11 @@ fn generate_icon_components(icons: &HashMap<String, String>) -> TokenStream {
     let icon_count = icons.len();
 
     quote! {
-        // Auto-generated Lucide icons for Leptos
+        use leptos::prelude::*;
+
+        // Auto-generated Leptos Lucide icons
         //
-        // This module contains typed components for each Lucide icon.
+        // This module contains typed components for each Leptos Lucide icon.
         // Each component is inlined for zero-cost abstractions.
 
         #(#component_tokens)*
@@ -160,13 +163,13 @@ fn generate_icon_components(icons: &HashMap<String, String>) -> TokenStream {
 
         /// Macro for creating icon components with custom classes
         #[macro_export]
-        macro_rules! lucide_icon {
+        macro_rules! leptos_lucide_icon {
             ($icon:ident) => {
                 $icon()
             };
             ($icon:ident, class = $class:expr) => {
                 leptos::view! {
-                    <div class={format!("lucide-wrapper {}", $class)}>
+                    <div class={format!("leptos-lucide-wrapper {}", $class)}>
                         {$icon()}
                     </div>
                 }
