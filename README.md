@@ -1,4 +1,4 @@
-# lucide-leptos
+# leptos-lucide-tree
 
 A comprehensive Lucide icon library for Leptos with tree-shaking support and
 zero-cost abstractions.
@@ -25,7 +25,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-lucide-leptos = "0.1.0"
+leptos-lucide-tree = "0.1.0"
 leptos = "0.8.6"
 ```
 
@@ -33,7 +33,7 @@ leptos = "0.8.6"
 
 ```rust
 use leptos::*;
-use lucide_leptos::*;
+use leptos_lucide_tree::*;
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -55,7 +55,7 @@ pub fn App() -> impl IntoView {
 
 ```rust
 use leptos::*;
-use lucide_leptos::*;
+use leptos_lucide_tree::*;
 
 #[component]
 pub fn BasicIcons() -> impl IntoView {
@@ -77,7 +77,7 @@ pub fn BasicIcons() -> impl IntoView {
 
 ```rust
 use leptos::*;
-use lucide_leptos::*;
+use leptos_lucide_tree::*;
 
 #[component]
 pub fn MacroExamples() -> impl IntoView {
@@ -100,7 +100,7 @@ pub fn MacroExamples() -> impl IntoView {
 
 ```rust
 use leptos::*;
-use lucide_leptos::*;
+use leptos_lucide_tree::*;
 
 #[component]
 pub fn ConfigurableIcons() -> impl IntoView {
@@ -132,7 +132,7 @@ pub fn ConfigurableIcons() -> impl IntoView {
 
 ```rust
 use leptos::*;
-use lucide_leptos::*;
+use leptos_lucide_tree::*;
 
 #[component]
 pub fn BuilderIcons() -> impl IntoView {
@@ -188,7 +188,7 @@ Add custom styles for your icons:
 
 ```rust
 use leptos::*;
-use lucide_leptos::*;
+use leptos_lucide_tree::*;
 
 #[component]
 pub fn ConditionalIcon() -> impl IntoView {
@@ -219,7 +219,7 @@ pub fn ConditionalIcon() -> impl IntoView {
 
 ```rust
 use leptos::*;
-use lucide_leptos::*;
+use leptos_lucide_tree::*;
 
 #[component]
 pub fn IconGrid() -> impl IntoView {
@@ -317,7 +317,7 @@ The library uses a build script that:
 ### Cargo Features
 
 ```toml
-[dependencies.lucide-leptos]
+[dependencies.leptos-lucide-tree]
 version = "0.1.0"
 features = ["ssr"]  # For server-side rendering
 # features = ["hydrate"]  # For hydration
@@ -353,10 +353,10 @@ Only the icons you import and use will be included in your final bundle:
 
 ```rust
 // Only Home and User icons will be bundled
-use lucide_leptos::{Home, User};
+use leptos_lucide_tree::{Home, User};
 
 // Not bundled - never imported
-// use lucide_leptos::Heart;
+// use leptos_lucide_tree::Heart;
 ```
 
 ### Bundle Size Optimization
@@ -420,8 +420,8 @@ This project uses [Just](https://github.com/casey/just) as a command runner for 
 cargo install just
 
 # Clone the repository
-git clone https://github.com/soulcorrea/lucide-leptos
-cd lucide-leptos
+git clone https://github.com/soulcorrea/leptos-lucide-tree
+cd leptos-lucide-tree
 
 # Setup development environment (installs tools and dependencies)
 just setup

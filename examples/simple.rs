@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use lucide_leptos::*;
+use leptos_lucide_tree::*;
 
 #[component]
 fn App() -> impl IntoView {

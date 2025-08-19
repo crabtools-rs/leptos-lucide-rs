@@ -14,7 +14,7 @@ struct LucideIconData {
 
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
-    println!("cargo::rustc-check-cfg=cfg(lucide_leptos_generated)");
+    println!("cargo::rustc-check-cfg=cfg(leptos_lucide_tree_generated)");
 
     let out_dir = std::env::var("OUT_DIR").unwrap();
     let dest_path = Path::new(&out_dir).join("icons.rs");
@@ -32,7 +32,7 @@ fn main() {
     // Write to file
     fs::write(&dest_path, formatted_code).expect("Failed to write generated icons");
 
-    println!("cargo:rustc-cfg=lucide_leptos_generated");
+    println!("cargo:rustc-cfg=leptos_lucide_tree_generated");
 }
 
 fn fetch_lucide_icons() -> HashMap<String, String> {

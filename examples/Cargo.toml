@@ -1,5 +1,5 @@
 [package]
-name = "lucide-leptos-examples"
+name = "leptos-lucide-tree-examples"
 version = "0.1.0"
 edition = "2021"
 
@@ -13,7 +13,7 @@ path = "advanced_styling.rs"
 
 [dependencies]
 leptos = { version = "0.8.6", features = ["csr"] }
-lucide-leptos = { path = ".." }
+leptos-lucide-tree = { path = ".." }
 wasm-bindgen = "0.2"
 
 [dependencies.web-sys]
