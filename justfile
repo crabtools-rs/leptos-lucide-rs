@@ -1,4 +1,4 @@
-# Leptos Lucide Icons - Development Justfile
+# Lucide Leptos Icons - Development Justfile
 # Run `just` or `just help` to see available commands
 
 # Default recipe shows help
@@ -18,12 +18,12 @@ install-deps:
 
 # Build the library
 build:
-    @echo "Building leptos-lucide..."
+    @echo "Building lucide-leptos..."
     cargo build
 
 # Build the library in release mode
 build-release:
-    @echo "Building leptos-lucide (release)..."
+    @echo "Building lucide-leptos (release)..."
     cargo build --release
 
 # Force regeneration of icon components

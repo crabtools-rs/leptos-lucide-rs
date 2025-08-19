@@ -14,7 +14,7 @@
 //!
 //! ```rust
 //! use leptos::prelude::*;
-//! use leptos_lucide::*;
+//! use lucide_leptos::*;
 //!
 //! #[component]
 //! pub fn MyComponent() -> impl IntoView {
@@ -32,7 +32,7 @@
 //!
 //! ```rust
 //! use leptos::prelude::*;
-//! use leptos_lucide::*;
+//! use lucide_leptos::*;
 //!
 //! #[component]
 //! pub fn StyledIcons() -> impl IntoView {
@@ -56,11 +56,11 @@
 use leptos::prelude::*;
 
 // Include the generated icons module
-#[cfg(leptos_lucide_generated)]
+#[cfg(lucide_leptos_generated)]
 include!(concat!(env!("OUT_DIR"), "/icons.rs"));
 
 // Fallback module when icons aren't generated yet (for IDE support)
-#[cfg(not(leptos_lucide_generated))]
+#[cfg(not(lucide_leptos_generated))]
 pub mod fallback {
     use leptos::*;
 
@@ -187,7 +187,7 @@ pub mod fallback {
 }
 
 // Re-export fallback icons when generated ones aren't available
-#[cfg(not(leptos_lucide_generated))]
+#[cfg(not(lucide_leptos_generated))]
 pub use fallback::*;
 
 /// Icon configuration for customizing appearance
