@@ -1,6 +1,6 @@
 [package]
 name = "leptos-lucide-tree"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2021"
 description = "Lucide icons for Leptos with tree-shaking support"
 license = "MIT"
