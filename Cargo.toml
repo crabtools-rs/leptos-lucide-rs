@@ -1,6 +1,6 @@
 [package]
 name = "leptos-lucide-rs"
-version = "0.1.6"
+version = "0.1.5"
 edition = "2021"
 description = "A comprehensive Lucide icon library for Leptos with tree-shaking support and zero-cost runtime overhead."
 license = "MIT"
