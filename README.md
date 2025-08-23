@@ -1,23 +1,18 @@
-# leptos-lucide-tree
+# leptos-lucide
 
-A comprehensive Lucide icon library for Leptos with tree-shaking support and
-zero-cost runtime overhead.
+A comprehensive Lucide icon library for Leptos with tree-shaking support and zero-cost runtime overhead.
 
 ## 🌟 Features
 
 - **🌳 Tree-shaking**: Only bundle the icons you actually use
-- **⚡ Zero-cost**: All icon components are `#[inline(always)]` for maximum
-  performance
-- **🦀 Rust-friendly**: Generated component names follow Rust conventions and
-  avoid naming conflicts
-- **🔒 Type-safe**: Each icon is a separate typed component with full IDE
-  support
-- **🎨 Customizable**: Easy styling with CSS classes, inline styles, and
-  configuration
-- **📦 Latest dependencies**: Uses the latest stable versions of all dependency
-  crates
-- **🔄 Auto-generated**: Icons are generated at build time from the latest
-  Lucide icon set
+- **⚡ Zero-cost abstractions**: All icon components are `#[inline(always)]` for maximum performance
+- **🚀 Lazy loading**: SVG content is only generated when components are actually rendered
+- **🦀 Rust-friendly**: Generated component names follow Rust conventions and avoid naming conflicts
+- **🔒 Type-safe**: Each icon is a separate typed component with full IDE support
+- **🎨 Customizable**: Easy styling with CSS classes, inline styles, and configuration
+- **📦 Latest dependencies**: Uses `lucide-svg-rs` for official icon data
+- **🔄 Dynamic loading**: Load any icon by name at runtime
+- **📈 Build performance**: Fast compilation with efficient code generation
 
 ## 📦 Installation
 
@@ -25,15 +20,16 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-leptos-lucide-tree = "0.1.4"
-leptos = "0.8.6"
+leptos-lucide-rs = "0.1"
+leptos = "0.8"
+lucide-svg-rs = "0.1"  # Used internally for lazy loading
 ```
 
 ## 🚀 Quick Start
 
 ```rust
 use leptos::*;
-use leptos_lucide_tree::*;
+use leptos_lucide::*;
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -55,7 +51,7 @@ pub fn App() -> impl IntoView {
 
 ```rust
 use leptos::*;
-use leptos_lucide_tree::*;
+use leptos_lucide::*;
 
 #[component]
 pub fn BasicIcons() -> impl IntoView {
@@ -73,24 +69,69 @@ pub fn BasicIcons() -> impl IntoView {
 }
 ```
 
-### Using the `leptos_lucide_icon!` Macro
+### Using the `lucide_icon!` Macro
 
 ```rust
 use leptos::*;
-use leptos_lucide_tree::*;
+use leptos_lucide::*;
 
 #[component]
 pub fn MacroExamples() -> impl IntoView {
     view! {
         <div class="flex gap-4">
             // Basic icon
-            {leptos_lucide_icon!(Home)}
+            {lucide_icon!(Home)}
 
             // With custom class
-            {leptos_lucide_icon!(User, class = "text-red-500 w-8 h-8")}
+            {lucide_icon!(User, class = "text-red-500 w-8 h-8")}
 
             // With custom size
-            {leptos_lucide_icon!(Heart, size = "32px")}
+            {lucide_icon!(Heart, size = "32px")}
+        </div>
+    }
+}
+```
+
+### Using Dynamic Icons
+
+```rust
+use leptos::*;
+use leptos_lucide::*;
+
+#[component]
+pub fn DynamicIcons() -> impl IntoView {
+    let (icon_name, set_icon_name) = create_signal("home".to_string());
+
+    view! {
+        <div class="space-y-4">
+            <h2>"Dynamic Icon Loading"</h2>
+
+            // Load icon by name at runtime
+            <DynamicIcon name=icon_name()/>
+
+            // With styling
+            <DynamicIcon
+                name="search"
+                class=Some("text-blue-500".to_string())
+                size=Some("32px".to_string())
+            />
+
+            // Using the macro
+            {dynamic_icon!("heart", class = "text-red-500")}
+            {dyn_icon!("star", size = "24px")}  // Alias for dynamic_icon!
+
+            // Interactive selection
+            <div class="flex gap-2">
+                <button on:click=move |_| set_icon_name("home".to_string())>
+                    "Home"
+                </button>
+                <button on:click=move |_| set_icon_name("user".to_string())>
+                    "User"
+                </button>
+                <button on:click=move |_| set_icon_name("heart".to_string())>
+                    "Heart"
+                </button>
+            </div>
         </div>
     }
 }
@@ -100,7 +141,7 @@ pub fn MacroExamples() -> impl IntoView {
 
 ```rust
 use leptos::*;
-use leptos_lucide_tree::*;
+use leptos_lucide::*;
 
 #[component]
 pub fn ConfigurableIcons() -> impl IntoView {
@@ -112,16 +153,28 @@ pub fn ConfigurableIcons() -> impl IntoView {
                 config=Some(IconConfig::new()
                     .class("text-green-500")
                     .size("24px")
-                    .stroke_width("1.5"))
+                    .stroke_width("1.5")
+                )
             />
 
-            // Multiple configurations
+            // With custom wrapper element
             <Icon
                 icon=|| Search()
                 config=Some(IconConfig::new()
                     .class("hover:text-blue-500 transition-colors")
                     .size("20px")
-                    .stroke("currentColor"))
+                )
+                wrapper=Some("button".to_string())
+            />
+
+            // Multiple configurations
+            <Icon
+                icon=|| Heart()
+                config=Some(IconConfig::new()
+                    .class("text-red-500 cursor-pointer")
+                    .stroke("currentColor")
+                )
+                wrapper=Some("span".to_string())
             />
         </div>
     }
@@ -132,7 +185,7 @@ pub fn ConfigurableIcons() -> impl IntoView {
 
 ```rust
 use leptos::*;
-use leptos_lucide_tree::*;
+use leptos_lucide::*;
 
 #[component]
 pub fn BuilderIcons() -> impl IntoView {
@@ -148,12 +201,12 @@ pub fn BuilderIcons() -> impl IntoView {
                 stroke_width("2")
             )}
 
-            // Complex styling
+            // With custom wrapper
             {icon!(Heart,
-                class("text-red-500 hover:text-red-600"),
+                wrapper = "button",
+                class("text-red-500 hover:text-red-600 cursor-pointer"),
                 size("32px"),
-                stroke_width("1.5"),
-                style("cursor: pointer; transition: color 0.2s;")
+                style("transition: color 0.2s;")
             )}
         </div>
     }
@@ -167,16 +220,16 @@ pub fn BuilderIcons() -> impl IntoView {
 Add custom styles for your icons:
 
 ```css
-.leptos-lucide-icon {
+.lucide-icon {
   /* Default icon styles */
   transition: all 0.2s ease-in-out;
 }
 
-.leptos-lucide-icon:hover {
+.lucide-icon:hover {
   transform: scale(1.1);
 }
 
-.leptos-lucide-wrapper {
+.lucide-wrapper {
   /* Wrapper styles for positioning */
   display: inline-flex;
   align-items: center;
@@ -188,7 +241,7 @@ Add custom styles for your icons:
 
 ```rust
 use leptos::*;
-use leptos_lucide_tree::*;
+use leptos_lucide::*;
 
 #[component]
 pub fn ConditionalIcon() -> impl IntoView {
@@ -219,7 +272,7 @@ pub fn ConditionalIcon() -> impl IntoView {
 
 ```rust
 use leptos::*;
-use leptos_lucide_tree::*;
+use leptos_lucide::*;
 
 #[component]
 pub fn IconGrid() -> impl IntoView {
@@ -264,15 +317,12 @@ This library includes all Lucide icons with Rust-friendly names. Some examples:
 - `ChevronLeft` (from `chevron-left`)
 - `ArrowRight` (from `arrow-right`)
 - `PlusCircle` (from `plus-circle`)
-- `MinusIcon` (from `minus` - renamed to avoid conflict with Rust's minus
-  operator)
-- `TypeIcon` (from `type` - renamed to avoid conflict with Rust's `type`
-  keyword)
+- `MinusIcon` (from `minus` - renamed to avoid conflict with Rust's minus operator)
+- `TypeIcon` (from `type` - renamed to avoid conflict with Rust's `type` keyword)
 
 ### Naming Convention
 
-The library automatically converts kebab-case icon names to PascalCase Rust
-component names:
+The library automatically converts kebab-case icon names to PascalCase Rust component names:
 
 - `arrow-left` → `ArrowLeft`
 - `chevron-down` → `ChevronDown`
@@ -281,8 +331,7 @@ component names:
 
 ### Conflict Resolution
 
-When icon names would conflict with Rust keywords or common types, the library
-automatically renames them:
+When icon names would conflict with Rust keywords or common types, the library automatically renames them:
 
 - `type` → `TypeIcon`
 - `box` → `BoxIcon`
@@ -297,28 +346,30 @@ If multiple icons would generate the same name, numbers are appended:
 
 ## 🏗️ Build Process
 
-The library uses a build script that:
+The library uses `lucide-svg-rs` and an intelligent build script that:
 
-1. **Downloads latest Lucide icons** from the official repository
-2. **Generates typed components** for each icon at build time
-3. **Ensures unique names** by handling Rust keyword conflicts
-4. **Optimizes for performance** with `#[inline(always)]` annotations
-5. **Provides fallbacks** for development when icons aren't generated yet
+1. **Fetches icon metadata** from the `lucide-svg-rs` crate
+2. **Generates typed component signatures** for each icon at build time
+3. **Implements lazy loading** - SVG content is generated only when components are used
+4. **Ensures unique names** by handling Rust keyword conflicts
+5. **Optimizes for performance** with `#[inline(always)]` annotations
+6. **Provides fallbacks** for development when icons aren't generated yet
 
 ### Build-time Features
 
-- **Fast compilation**: Generated code is optimized for quick builds
-- **rust-analyzer friendly**: Works seamlessly with IDE tooling
-- **Tree-shaking ready**: Only used icons are included in the final bundle
-- **Zero runtime overhead**: All components are inlined
+- **Fast compilation**: Generated components are lightweight function signatures
+- **rust-analyzer friendly**: Works seamlessly with IDE tooling and autocomplete
+- **Tree-shaking ready**: Only used icons affect bundle size
+- **Lazy content loading**: SVG paths loaded from `lucide-svg-rs` at render time
+- **Dynamic capabilities**: Can load any Lucide icon by name at runtime
 
 ## 🔧 Configuration
 
 ### Cargo Features
 
 ```toml
-[dependencies.leptos-lucide-tree]
-version = "0.1.4"
+[dependencies.leptos-lucide-rs]
+version = "0.1"
 features = ["ssr"]  # For server-side rendering
 # features = ["hydrate"]  # For hydration
 # features = ["csr"]  # For client-side rendering only
@@ -328,16 +379,19 @@ features = ["ssr"]  # For server-side rendering
 
 You can customize the build process by setting environment variables:
 
-````bash # Skip downloading and use cached icons LUCIDE_OFFLINE=1 cargo build
+```bash
+# Skip downloading and use cached icons
+LUCIDE_OFFLINE=1 cargo build
 
-# Use a specific Lucide version LUCIDE_VERSION=v0.263.0 cargo build ```
+# Use a specific Lucide version
+LUCIDE_VERSION=v0.263.0 cargo build
+```
 
 ## 🚀 Performance
 
 ### Zero-Cost Abstractions
 
-All icon components are marked with `#[inline(always)]`, ensuring they have
-zero call overhead in release builds:
+All icon components are marked with `#[inline(always)]`, ensuring they have zero call overhead in release builds:
 
 ```rust
 #[inline(always)]
@@ -345,7 +399,7 @@ zero call overhead in release builds:
 pub fn Home() -> impl leptos::IntoView {
     // Implementation is inlined directly at call site
 }
-````
+```
 
 ### Tree Shaking
 
@@ -353,13 +407,18 @@ Only the icons you import and use will be included in your final bundle:
 
 ```rust
 // Only Home and User icons will be bundled
-use leptos_lucide_tree::{Home, User};
+use leptos_lucide::{Home, User};
 
 // Not bundled - never imported
-// use leptos_lucide_tree::Heart;
+// use leptos_lucide::Heart;
 ```
 
-### Bundle Size Optimization
+### Performance Benefits
+
+- **Lazy SVG generation**: Icon content is only created when the component renders
+- **Efficient builds**: Build script only generates component signatures, not full content
+- **Runtime flexibility**: Can load any icon dynamically without affecting bundle size
+- **Memory efficient**: SVG data isn't stored in memory until needed
 
 - **Minimal overhead**: Each icon adds ~1-2KB to your bundle
 - **SVG optimization**: Icons use optimized SVG paths
@@ -413,171 +472,27 @@ mod tests {
 
 ### Development Setup
 
-This project uses [Just](https://github.com/casey/just) as a command runner for development tasks. Install it first:
-
 ```bash
-# Install Just (command runner)
-cargo install just
-
 # Clone the repository
-git clone https://github.com/soulcorrea/leptos-lucide-tree
-cd leptos-lucide-tree
+git clone https://github.com/your-org/leptos-lucide
+cd leptos-lucide
 
-# Setup development environment (installs tools and dependencies)
-just setup
+# Build the library (this will download icons and generate components)
+cargo build
 
-# See all available commands
-just help
-```
+# Run tests
+cargo test
 
-### Development Commands
+# Check formatting
+cargo fmt --check
 
-#### Building and Testing
-
-```bash
-# Build the library (downloads icons and generates components)
-just build
-
-# Run all tests
-just test
-
-# Run tests with verbose output
-just test-verbose
-
-# Build examples and verify they compile
-just test-examples
-```
-
-#### Code Quality
-
-```bash
-# Format code
-just fmt
-
-# Run clippy linter
-just clippy
-
-# Run all linting tools
-just lint
-
-# Run all pre-commit checks (fmt, clippy, test, targets)
-just pre-commit
-```
-
-#### Examples
-
-```bash
-# Build all examples
-just examples
-
-# Run simple example (opens browser at localhost:8080)
-just run-simple
-
-# Run advanced styling example (opens browser at localhost:8081)
-just run-advanced
-
-# Build examples for production
-just build-simple
-just build-advanced
-```
-
-#### Development Workflow
-
-```bash
-# Start development server for simple example
-just dev
-
-# Start development server for advanced example
-just dev-advanced
-
-# Watch for changes and rebuild automatically
-just watch
-
-# Watch for changes and run tests automatically
-just watch-test
-
-# Quick development cycle (build + test)
-just dev-cycle
-
-# Full development workflow (clean + build + test + examples)
-just dev-full
-```
-
-#### Icon Management
-
-```bash
-# Force regeneration of icon components
-just generate-icons
-
-# Get list of available icons
-just icon-list
-
-# Validate generated icon code
-just validate
-```
-
-#### Documentation
-
-```bash
-# Generate and open documentation
-just docs
-
-# Generate docs including private items
-just docs-private
-```
-
-#### Maintenance
-
-```bash
-# Clean build artifacts
-just clean
-
-# Update dependencies
-just update
-
-# Check for outdated dependencies (requires cargo-outdated)
-just outdated
-
-# Audit dependencies for security issues (requires cargo-audit)
-just audit
-
-# Generate test coverage report (requires cargo-tarpaulin)
-just coverage
-```
-
-#### Release
-
-```bash
-# Prepare for release (runs all checks)
-just release-prep
-
-# Release patch version (requires cargo-release)
-just release-patch
-
-# Release minor version (requires cargo-release)
-just release-minor
-
-# Release major version (requires cargo-release)
-just release-major
-```
-
-#### Verification
-
-```bash
-# Verify library works correctly (build + test + examples)
-just verify
-
-# Check build on multiple targets
-just check-targets
-
-# Run performance tests
-just perf
+# Run clippy
+cargo clippy -- -D warnings
 ```
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE)
-file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
@@ -597,12 +512,6 @@ Check out the [examples](examples/) directory for more usage patterns:
 
 ## 🔗 Related Projects
 
-- [leptos](https://github.com/leptos-rs/leptos) - The reactive web framework
-  this library is built for
+- [leptos](https://github.com/leptos-rs/leptos) - The reactive web framework this library is built for
 - [lucide](https://lucide.dev/) - The source of the beautiful icons
-- [tauri-icons](https://github.com/tauri-apps/tauri-icons) - Similar icon
-  library for Tauri apps
-
-```
-
-```
+- [tauri-icons](https://github.com/tauri-apps/tauri-icons) - Similar icon library for Tauri apps

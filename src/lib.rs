@@ -13,8 +13,8 @@
 //! ## Usage
 //!
 //! ```rust
-//! use leptos::prelude::*;
-//! use leptos_lucide_tree::*;
+//! use leptos::*;
+//! use leptos_lucide_rs::*;
 //!
 //! #[component]
 //! pub fn MyComponent() -> impl IntoView {
@@ -31,18 +31,18 @@
 //! ## Custom Styling
 //!
 //! ```rust
-//! use leptos::prelude::*;
-//! use leptos_lucide_tree::*;
+//! use leptos::*;
+//! use leptos_lucide_rs::*;
 //!
 //! #[component]
 //! pub fn StyledIcons() -> impl IntoView {
 //!     view! {
 //!         <div>
 //!             // Using the macro for custom classes
-//!             {leptos_lucide_icon!(Home, class = "text-blue-500 w-6 h-6")}
+//!             {lucide_icon!(Home, class = "text-blue-500 w-6 h-6")}
 //!
 //!             // Using the macro for custom sizes
-//!             {leptos_lucide_icon!(User, size = "32px")}
+//!             {lucide_icon!(User, size = "32px")}
 //!
 //!             // Direct component with custom attributes
 //!             <div class="icon-wrapper">
@@ -56,11 +56,11 @@
 use leptos::prelude::*;
 
 // Include the generated icons module
-#[cfg(leptos_lucide_tree_generated)]
+#[cfg(leptos_lucide_generated)]
 include!(concat!(env!("OUT_DIR"), "/icons.rs"));
 
 // Fallback module when icons aren't generated yet (for IDE support)
-#[cfg(not(leptos_lucide_tree_generated))]
+#[cfg(not(leptos_lucide_generated))]
 pub mod fallback {
     use leptos::*;
 
@@ -68,101 +68,42 @@ pub mod fallback {
     #[inline(always)]
     #[allow(non_snake_case)]
     pub fn Home() -> impl IntoView {
-        view! {
-            <svg
-                class="leptos-lucide-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                data-leptos-lucide="home"
-                inner_html=r#"<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9,22 9,12 15,12 15,22"></polyline>"#
-            >
-            </svg>
-        }
+        load_icon_fallback("home")
     }
 
     /// Fallback User icon for development
     #[inline(always)]
     #[allow(non_snake_case)]
     pub fn User() -> impl IntoView {
-        view! {
-            <svg
-                class="leptos-lucide-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                data-leptos-lucide="user"
-                inner_html=r#"<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>"#
-            >
-            </svg>
-        }
+        load_icon_fallback("user")
     }
 
     /// Fallback Heart icon for development
     #[inline(always)]
     #[allow(non_snake_case)]
     pub fn Heart() -> impl IntoView {
-        view! {
-            <svg
-                class="leptos-lucide-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                data-leptos-lucide="heart"
-                inner_html=r#"<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>"#
-            >
-            </svg>
-        }
+        load_icon_fallback("heart")
     }
 
     /// Fallback Search icon for development
     #[inline(always)]
     #[allow(non_snake_case)]
     pub fn Search() -> impl IntoView {
-        view! {
-            <svg
-                class="leptos-lucide-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                data-leptos-lucide="search"
-                inner_html=r#"<circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path>"#
-            >
-            </svg>
-        }
+        load_icon_fallback("search")
     }
 
     /// Fallback Star icon for development
     #[inline(always)]
     #[allow(non_snake_case)]
     pub fn Star() -> impl IntoView {
+        load_icon_fallback("star")
+    }
+
+    /// Generic fallback icon loader using lucide-svg-rs
+    fn load_icon_fallback(name: &str) -> impl IntoView {
         view! {
             <svg
-                class="leptos-lucide-icon"
+                class="lucide-icon"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -172,23 +113,47 @@ pub mod fallback {
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                data-leptos-lucide="star"
-                inner_html=r#"<polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>"#
+                data-lucide=name
+                inner_html=move || {
+                    let client = lucide_svg_rs::LucideClient::default();
+                    match client.get_icon_content(&format!("{}.svg", name)) {
+                        Ok(svg_content) => {
+                            // Extract content between <svg> tags
+                            if let (Some(start), Some(end)) = (svg_content.find('>'), svg_content.rfind("</svg>")) {
+                                if start < end {
+                                    return svg_content[start + 1..end].to_string();
+                                }
+                            }
+                            // Ultimate fallback if parsing fails
+                            r#"<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>"#.to_string()
+                        }
+                        Err(_) => {
+                            // Ultimate fallback
+                            r#"<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>"#.to_string()
+                        }
+                    }
+                }
             >
             </svg>
         }
     }
 
-    /// Fallback icon count for development
-    pub const ICON_COUNT: usize = 5;
+    /// Dynamic icon loader (same as generated version)
+    pub fn load_icon(name: &str) -> impl IntoView {
+        load_icon_fallback(name)
+    }
 }
 
-// Re-export fallback icons when generated ones aren't available
-#[cfg(not(leptos_lucide_tree_generated))]
+// Re-export fallback icons when not generated
+#[cfg(not(leptos_lucide_generated))]
 pub use fallback::*;
 
+/// Re-export the load_icon function for dynamic loading
+#[cfg(not(leptos_lucide_generated))]
+pub use fallback::load_icon;
+
 /// Icon configuration for customizing appearance
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug)]
 pub struct IconConfig {
     /// CSS class to apply to the icon
     pub class: Option<String>,
@@ -202,6 +167,19 @@ pub struct IconConfig {
     pub stroke: Option<String>,
     /// Fill color
     pub fill: Option<String>,
+}
+
+impl Default for IconConfig {
+    fn default() -> Self {
+        Self {
+            class: None,
+            style: None,
+            size: None,
+            stroke_width: None,
+            stroke: None,
+            fill: None,
+        }
+    }
 }
 
 impl IconConfig {
@@ -247,10 +225,181 @@ impl IconConfig {
     }
 }
 
-/// Utility macro for quick icon creation
+/// Helper component for rendering icons with configuration (enhanced version)
+#[component]
+pub fn Icon<F, V>(
+    /// The icon component function
+    icon: F,
+
+    /// Optional configuration
+    #[prop(optional)]
+    config: Option<IconConfig>,
+
+    /// Set wrapper element (defaults to "div")
+    #[prop(optional)]
+    wrapper: Option<String>,
+) -> leptos::prelude::AnyView
+where
+    F: Fn() -> V + 'static,
+    V: IntoView,
+{
+    let config = config.unwrap_or_default();
+    let wrapper_tag = wrapper.unwrap_or_else(|| "div".to_string());
+
+    let mut wrapper_class = "lucide-wrapper".to_string();
+    if let Some(ref class) = config.class {
+        wrapper_class.push(' ');
+        wrapper_class.push_str(class);
+    }
+
+    let mut wrapper_style = String::new();
+    if let Some(ref size) = config.size {
+        wrapper_style.push_str(&format!("width: {}; height: {};", size, size));
+    }
+    if let Some(ref style) = config.style {
+        if !wrapper_style.is_empty() {
+            wrapper_style.push(' ');
+        }
+        wrapper_style.push_str(style);
+    }
+
+    // Create the wrapper with custom tag
+
+    match wrapper_tag.as_str() {
+        "span" => view! {
+            <span
+                class=wrapper_class.clone()
+                style=move || if wrapper_style.is_empty() {
+                    None
+                } else {
+                    Some(wrapper_style.clone())
+                }
+            >
+                {icon()}
+            </span>
+        }
+        .into_any(),
+
+        "button" => view! {
+            <button
+                class=wrapper_class.clone()
+                style=move || if wrapper_style.is_empty() {
+                    None
+                } else {
+                    Some(wrapper_style.clone())
+                }
+            >
+                {icon()}
+            </button>
+        }
+        .into_any(),
+
+        _ => view! {
+            <div
+                class=wrapper_class.clone()
+                style=move || if wrapper_style.is_empty() {
+                    None
+                } else {
+                    Some(wrapper_style.clone())
+                }
+            >
+                {icon()}
+            </div>
+        }
+        .into_any(),
+    }
+}
+
+// #[component]
+// pub fn Icon<F>(
+//     /// The icon component function
+//     icon: F,
+//     /// Optional configuration
+//     #[prop(optional)]
+//     config: Option<IconConfig>,
+//     /// Set wrapper element (defaults to "div")
+//     #[prop(optional)]
+//     wrapper: Option<String>,
+// ) -> impl IntoView
+// where
+//     F: Fn() -> impl IntoView + 'static,
+// {
+//     let config = config.unwrap_or_default();
+//     let wrapper_tag = wrapper.unwrap_or_else(|| "div".to_string());
+//
+//     let mut wrapper_class = "lucide-wrapper".to_string();
+//     if let Some(ref class) = config.class {
+//         wrapper_class.push(' ');
+//         wrapper_class.push_str(class);
+//     }
+//
+//     let mut wrapper_style = String::new();
+//     if let Some(ref size) = config.size {
+//         wrapper_style.push_str(&format!("width: {}; height: {};", size, size));
+//     }
+//     if let Some(ref style) = config.style {
+//         if !wrapper_style.is_empty() {
+//             wrapper_style.push(' ');
+//         }
+//         wrapper_style.push_str(style);
+//     }
+//
+//     // Create the wrapper with custom tag
+//     match wrapper_tag.as_str() {
+//         "span" => view! {
+//             <span
+//                 class=&wrapper_class
+//                 style=move || if wrapper_style.is_empty() { None } else { Some(wrapper_style.clone()) }
+//             >
+//                 {icon()}
+//             </span>
+//         }.into_view(),
+//         "button" => view! {
+//             <button
+//                 class=&wrapper_class
+//                 style=move || if wrapper_style.is_empty() { None } else { Some(wrapper_style.clone()) }
+//             >
+//                 {icon()}
+//             </button>
+//         }.into_view(),
+//         _ => view! {
+//             <div
+//                 class=&wrapper_class
+//                 style=move || if wrapper_style.is_empty() { None } else { Some(wrapper_style.clone()) }
+//             >
+//                 {icon()}
+//             </div>
+//         }.into_view(),
+//     }
+// }
+
+/// Utility macro for quick icon creation with builder pattern (enhanced)
 #[macro_export]
 macro_rules! icon {
     ($icon:ident) => {
         $icon()
     };
+    ($icon:ident, $($method:ident($value:expr)),+ $(,)?) => {{
+        let config = leptos_lucide_rs::IconConfig::new()$(.$method($value))+;
+        leptos_lucide_rs::Icon(|| $icon(), Some(config), None)
+    }};
+    ($icon:ident, wrapper = $wrapper:expr, $($method:ident($value:expr)),+ $(,)?) => {{
+        let config = leptos_lucide_rs::IconConfig::new()$(.$method($value))+;
+        leptos_lucide_rs::Icon(|| $icon(), Some(config), Some($wrapper.to_string()))
+    }};
 }
+
+/// Simple macro to create dynamic icons by using the load_icon function
+#[macro_export]
+macro_rules! dynamic_icon {
+    ($name:expr) => {
+        #[cfg(leptos_lucide_generated)]
+        load_icon($name)
+
+        #[cfg(not(leptos_lucide_generated))]
+        fallback::load_icon($name)
+    };
+}
+
+/// Convenient alias for dynamic icons
+pub use dynamic_icon as dyn_icon;

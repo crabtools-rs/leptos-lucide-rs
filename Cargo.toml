@@ -1,27 +1,24 @@
 [package]
-name = "leptos-lucide-tree"
-version = "0.1.4"
+name = "leptos-lucide-rs"
+version = "0.1.5"
 edition = "2021"
-description = "Lucide icons for Leptos with tree-shaking support"
+description = "A comprehensive Lucide icon library for Leptos with tree-shaking support and zero-cost runtime overhead."
 license = "MIT"
-repository = "https://github.com/soulcorrea/leptos-lucide-tree"
+repository = "https://github.com/your-org/leptos-lucide"
 keywords = ["leptos", "icons", "lucide", "ui", "components"]
 categories = ["web-programming", "gui"]
 
 [dependencies]
-leptos = "0.8.6"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
+leptos = "0.8"
+lucide-svg-rs = { path = "../lucide-svg-rs/" }
 
 [build-dependencies]
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-reqwest = { version = "0.12", features = ["json", "blocking"] }
+# lucide-svg-rs = "0.1.2"
+lucide-svg-rs = { path = "../lucide-svg-rs/" }
 proc-macro2 = "1.0"
 quote = "1.0"
 syn = { version = "2.0", features = ["full"] }
 convert_case = "0.8"
-prettyplease = "0.2"
 
 [features]
 default = []
@@ -30,5 +27,5 @@ hydrate = ["leptos/hydrate"]
 csr = ["leptos/csr"]
 
 [lib]
-name = "leptos_lucide_tree"
+name = "leptos_lucide_rs"
 path = "src/lib.rs"

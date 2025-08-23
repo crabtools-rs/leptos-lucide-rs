@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use leptos_lucide_tree::*;
+use leptos_lucide_rs::*;
 
 #[component]
 fn App() -> impl IntoView {
@@ -55,9 +55,9 @@ fn App() -> impl IntoView {
                 </div>
             </div>
 
-            <div class="stats">
-                <p>"Total available icons: " {ICON_COUNT}</p>
-            </div>
+            // <div class="stats">
+            //     <p>"Total available icons: " {ICON_COUNT}</p>
+            // </div>
         </div>
     }
 }

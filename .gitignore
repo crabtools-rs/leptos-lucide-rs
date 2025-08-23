@@ -1,2 +1,4 @@
 /target
 Cargo.lock
+/lucide_icons
+**/.DS_Store

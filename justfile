@@ -18,12 +18,12 @@ install-deps:
 
 # Build the library
 build:
-    @echo "Building leptos-lucide-tree..."
+    @echo "Building leptos-lucide-rs..."
     cargo build
 
 # Build the library in release mode
 build-release:
-    @echo "Building leptos-lucide-tree (release)..."
+    @echo "Building leptos-lucide-rs (release)..."
     cargo build --release
 
 # Force regeneration of icon components
