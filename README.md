@@ -1,15 +1,21 @@
-# leptos-lucide
+# leptos-lucide-rs
 
-A comprehensive Lucide icon library for Leptos with tree-shaking support and zero-cost runtime overhead.
+A comprehensive Lucide icon library for Leptos with tree-shaking support and
+zero-cost runtime overhead.
 
 ## 🌟 Features
 
 - **🌳 Tree-shaking**: Only bundle the icons you actually use
-- **⚡ Zero-cost abstractions**: All icon components are `#[inline(always)]` for maximum performance
-- **🚀 Lazy loading**: SVG content is only generated when components are actually rendered
-- **🦀 Rust-friendly**: Generated component names follow Rust conventions and avoid naming conflicts
-- **🔒 Type-safe**: Each icon is a separate typed component with full IDE support
-- **🎨 Customizable**: Easy styling with CSS classes, inline styles, and configuration
+- **⚡ Zero-cost abstractions**: All icon components are `#[inline(always)]`
+  for maximum performance
+- **🚀 Lazy loading**: SVG content is only generated when components are
+  actually rendered
+- **🦀 Rust-friendly**: Generated component names follow Rust conventions and
+  avoid naming conflicts
+- **🔒 Type-safe**: Each icon is a separate typed component with full IDE
+  support
+- **🎨 Customizable**: Easy styling with CSS classes, inline styles, and
+  configuration
 - **📦 Latest dependencies**: Uses `lucide-svg-rs` for official icon data
 - **🔄 Dynamic loading**: Load any icon by name at runtime
 - **📈 Build performance**: Fast compilation with efficient code generation
@@ -322,7 +328,8 @@ This library includes all Lucide icons with Rust-friendly names. Some examples:
 
 ### Naming Convention
 
-The library automatically converts kebab-case icon names to PascalCase Rust component names:
+The library automatically converts kebab-case icon names to PascalCase Rust
+component names:
 
 - `arrow-left` → `ArrowLeft`
 - `chevron-down` → `ChevronDown`
@@ -331,7 +338,8 @@ The library automatically converts kebab-case icon names to PascalCase Rust comp
 
 ### Conflict Resolution
 
-When icon names would conflict with Rust keywords or common types, the library automatically renames them:
+When icon names would conflict with Rust keywords or common types, the library
+automatically renames them:
 
 - `type` → `TypeIcon`
 - `box` → `BoxIcon`
@@ -350,7 +358,8 @@ The library uses `lucide-svg-rs` and an intelligent build script that:
 
 1. **Fetches icon metadata** from the `lucide-svg-rs` crate
 2. **Generates typed component signatures** for each icon at build time
-3. **Implements lazy loading** - SVG content is generated only when components are used
+3. **Implements lazy loading** - SVG content is generated only when components
+   are used
 4. **Ensures unique names** by handling Rust keyword conflicts
 5. **Optimizes for performance** with `#[inline(always)]` annotations
 6. **Provides fallbacks** for development when icons aren't generated yet
@@ -391,7 +400,8 @@ LUCIDE_VERSION=v0.263.0 cargo build
 
 ### Zero-Cost Abstractions
 
-All icon components are marked with `#[inline(always)]`, ensuring they have zero call overhead in release builds:
+All icon components are marked with `#[inline(always)]`, ensuring they have
+zero call overhead in release builds:
 
 ```rust
 #[inline(always)]
@@ -416,8 +426,10 @@ use leptos_lucide::{Home, User};
 ### Performance Benefits
 
 - **Lazy SVG generation**: Icon content is only created when the component renders
-- **Efficient builds**: Build script only generates component signatures, not full content
-- **Runtime flexibility**: Can load any icon dynamically without affecting bundle size
+- **Efficient builds**: Build script only generates component signatures, not
+  full content
+- **Runtime flexibility**: Can load any icon dynamically without affecting
+  bundle size
 - **Memory efficient**: SVG data isn't stored in memory until needed
 
 - **Minimal overhead**: Each icon adds ~1-2KB to your bundle
@@ -474,7 +486,7 @@ mod tests {
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/leptos-lucide
+git clone https://github.com/soulcorrea/leptos-lucide-rs
 cd leptos-lucide
 
 # Build the library (this will download icons and generate components)
