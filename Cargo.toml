@@ -4,7 +4,7 @@ version = "0.1.6"
 edition = "2021"
 description = "A comprehensive Lucide icon library for Leptos with tree-shaking support and zero-cost runtime overhead."
 license = "MIT"
-repository = "https://github.com/your-org/leptos-lucide"
+repository = "https://github.com/soulcorrea/leptos-lucide-rs"
 keywords = ["leptos", "icons", "lucide", "ui", "components"]
 categories = ["web-programming", "gui"]
 
