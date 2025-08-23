@@ -10,11 +10,10 @@ categories = ["web-programming", "gui"]
 
 [dependencies]
 leptos = "0.8"
-lucide-svg-rs = { path = "../lucide-svg-rs/" }
+lucide-svg-rs = "0.1.2"
 
 [build-dependencies]
-# lucide-svg-rs = "0.1.2"
-lucide-svg-rs = { path = "../lucide-svg-rs/" }
+lucide-svg-rs = "0.1.2"
 proc-macro2 = "1.0"
 quote = "1.0"
 syn = { version = "2.0", features = ["full"] }
