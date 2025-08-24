@@ -1,7 +1,14 @@
 # leptos-lucide-rs
 
+[![Rust](https://github.com/soulcorrea/leptos-lucide-rs/actions/workflows/rust.yml/badge.svg)](https://github.com/soulcorrea/leptos-lucide-rs/actions/workflows/rust.yml)
+[![Crates.io](https://img.shields.io/crates/v/leptos-lucide-rs.svg)](https://crates.io/crates/leptos-lucide-rs)
+[![Documentation](https://docs.rs/hashbrown/badge.svg)](https://docs.rs/leptos-lucide-rs)
+[![Rust](https://img.shields.io/badge/rust-1.88.0%2B-blue.svg?maxAge=3600)](https://github.com/rust-lang/leptos-lucide-rs)
+
 A comprehensive Lucide icon library for Leptos with tree-shaking support and
 zero-cost runtime overhead.
+
+<img width="800" height="533" alt="leptos-lucide-800x600" src="https://github.com/user-attachments/assets/973379f2-c049-47f2-9891-242665c3c609" />
 
 ## 🌟 Features
 
