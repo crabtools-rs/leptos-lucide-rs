@@ -13,7 +13,7 @@
 //! ## Usage
 //!
 //! ```rust
-//! use leptos::*;
+//! use leptos::prelude::*;
 //! use leptos_lucide_rs::*;
 //!
 //! #[component]
@@ -31,7 +31,7 @@
 //! ## Custom Styling
 //!
 //! ```rust
-//! use leptos::*;
+//! use leptos::prelude::*;
 //! use leptos_lucide_rs::*;
 //!
 //! #[component]
@@ -39,10 +39,12 @@
 //!     view! {
 //!         <div>
 //!             // Using the macro for custom classes
-//!             {lucide_icon!(Home, class = "text-blue-500 w-6 h-6")}
+//!             // TODO:
+//!             // {icon!(Home, class = "text-blue-500 w-6 h-6")}
 //!
 //!             // Using the macro for custom sizes
-//!             {lucide_icon!(User, size = "32px")}
+//!             // TODO:
+//!             // {icon!(User, size = "32px")}
 //!
 //!             // Direct component with custom attributes
 //!             <div class="icon-wrapper">
@@ -254,7 +256,7 @@ where
 
     let mut wrapper_style = String::new();
     if let Some(ref size) = config.size {
-        wrapper_style.push_str(&format!("width: {}; height: {};", size, size));
+        wrapper_style.push_str(&format!("width: {size}; height: {size};"));
     }
     if let Some(ref style) = config.style {
         if !wrapper_style.is_empty() {
