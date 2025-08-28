@@ -71,9 +71,9 @@ run-simple: build
     cd examples && trunk serve index.html --port 8080 --open
 
 # Run advanced styling example with trunk
-run-advanced: build
-    @echo "Running advanced styling example on http://localhost:8081..."
-    cd examples && trunk serve advanced.html --port 8081 --open
+# run-advanced: build
+#     @echo "Running advanced styling example on http://localhost:8081..."
+#     cd examples && trunk serve advanced.html --port 8081 --open
 
 # Build simple example for production
 build-simple: build
@@ -81,9 +81,9 @@ build-simple: build
     cd examples && trunk build index.html --release
 
 # Build advanced example for production
-build-advanced: build
-    @echo "Building advanced example for production..."
-    cd examples && trunk build advanced.html --release
+# build-advanced: build
+#     @echo "Building advanced example for production..."
+#     cd examples && trunk build advanced.html --release
 
 # Generate documentation
 docs:

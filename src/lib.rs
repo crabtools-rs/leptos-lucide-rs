@@ -155,7 +155,7 @@ pub use fallback::*;
 pub use fallback::load_icon;
 
 /// Icon configuration for customizing appearance
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Default)]
 pub struct IconConfig {
     /// CSS class to apply to the icon
     pub class: Option<String>,
@@ -169,19 +169,6 @@ pub struct IconConfig {
     pub stroke: Option<String>,
     /// Fill color
     pub fill: Option<String>,
-}
-
-impl Default for IconConfig {
-    fn default() -> Self {
-        Self {
-            class: None,
-            style: None,
-            size: None,
-            stroke_width: None,
-            stroke: None,
-            fill: None,
-        }
-    }
 }
 
 impl IconConfig {
