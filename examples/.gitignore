@@ -1,2 +1,5 @@
 /target
 /dist
+Cargo.lock
+/lucide_icons
+**/.DS_Store
