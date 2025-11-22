@@ -31,7 +31,7 @@ fn get_available_icon_names() -> Vec<String> {
 
     let client = lucide_svg_rs::LucideClient::default();
     let mut names: Vec<String> = Vec::new();
-    if let Ok((_, n)) = client.download_all_icons(lucide_svg_rs::ICONS_DIR) {
+    if let Ok((_, n)) = client.download_all_icons(lucide_svg_rs::ICONS_TAR) {
         names.extend(n)
     } else {
         names.extend(

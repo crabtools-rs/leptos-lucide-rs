@@ -1,6 +1,6 @@
 [package]
 name = "leptos-lucide-rs"
-version = "0.1.8"
+version = "0.2.0"
 edition = "2021"
 description = "A comprehensive Lucide icon library for Leptos with tree-shaking support and zero-cost runtime overhead."
 license = "MIT"
@@ -10,14 +10,14 @@ categories = ["web-programming", "gui"]
 
 [dependencies]
 leptos = "0.8"
-lucide-svg-rs = "0.1"
+lucide-svg-rs = "0.2"
 
 [build-dependencies]
-lucide-svg-rs = "0.1"
+lucide-svg-rs = "0.2"
 proc-macro2 = "1.0"
 quote = "1.0"
 syn = { version = "2.0", features = ["full"] }
-convert_case = "0.8"
+convert_case = "0.9"
 
 [features]
 default = []
